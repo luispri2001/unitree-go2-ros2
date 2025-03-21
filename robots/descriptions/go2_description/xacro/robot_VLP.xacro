@@ -91,6 +91,55 @@
         </collision>
     </link>
 
+    <!-- ============= GPS ============= -->
+    <!-- Agregar el enlace GPS -->
+    <link name="gps_link">
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.01"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+        <sphere radius="0.02"/>
+        </geometry>
+        <material name="black">
+        <color rgba="0.1 0.1 0.1 1"/>
+        </material>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+        <sphere radius="0.02"/>
+        </geometry>
+    </collision>
+    </link>
+
+    <!-- Agregar la unión fija para el GPS -->
+    <joint name="gps_joint" type="fixed">
+    <parent link="trunk"/>
+    <child link="gps_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Configuración de Gazebo para GPS -->
+    <gazebo reference="gps_link">
+    <sensor name="my_gps" type="gps">
+    <!-- ensure the sensor is active (required) -->
+    <always_on>true</always_on>
+    <update_rate>30</update_rate>
+    <plugin name="gps" filename="libgazebo_ros_gps_sensor.so">
+        <ros>
+        <!-- publish to /gps/data -->
+        <namespace>/gps</namespace>
+        <remapping>~/out:=fix</remapping>
+        </ros>
+    </plugin>
+    </sensor>
+    </gazebo>
+
+
     <link name="camera_link">
         <inertial>
             <mass value="0.1"/>
