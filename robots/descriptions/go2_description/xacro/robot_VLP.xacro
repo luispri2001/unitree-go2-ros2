@@ -228,7 +228,7 @@
     <xacro:leg name="rh" mirror="-1" mirror_dae="False"  front_hind="-1" front_hind_dae="False" />
     <xacro:leg name="lh" mirror="1"  mirror_dae="True"   front_hind="-1" front_hind_dae="False" />
 
-    <xacro:include filename="$(find go2_description)/xacro/velodyne.xacro"/>
-    <!-- <xacro:include filename="$(find go2_description)/xacro/laser.xacro"/> -->
+    <!-- <xacro:include filename="$(find go2_description)/xacro/velodyne.xacro"/> -->
+    <xacro:include filename="$(find go2_description)/xacro/laser.xacro"/>
 
 </robot>
